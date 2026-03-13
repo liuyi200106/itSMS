@@ -1,0 +1,28 @@
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+.venv/
+venv/
+backend/media/
+backend/staticfiles/
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
