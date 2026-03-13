@@ -24,11 +24,12 @@ services:
         fromDatabase:
           name: sms-db
           property: connectionString
-  - type: static_site
-    name: sms-frontend
-    rootDir: frontend
-    buildCommand: npm ci && npm run build
-    publishDir: dist
+  - type: web
+  name: sms-frontend
+  env: static
+  rootDir: frontend
+  buildCommand: npm ci && npm run build
+  staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
         value: https://sms-backend.onrender.com/api
