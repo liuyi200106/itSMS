@@ -5,7 +5,8 @@ services:
     rootDir: SMS/backend
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
-    startCommand: gunicorn student_system.wsgi:application --log-file -
+    
+    startCommand: gunicorn student_system.wsgi:application --bind 0.0.0.0:$PORT --log-file -
     healthCheckPath: /api/health/
     envVars:
       - key: PYTHON_VERSION
