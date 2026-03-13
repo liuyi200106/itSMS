@@ -2,7 +2,7 @@ services:
   - type: web
     name: sms-backend
     env: python
-    rootDir: backend
+    rootDir: SMS/backend
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
     startCommand: gunicorn student_system.wsgi:application --log-file -
@@ -10,23 +10,25 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.8
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
       - key: DATABASE_URL
         fromDatabase:
           name: sms-db
           property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
       - key: ALLOWED_HOSTS
-        value: sms-backend.onrender.com
+        value: .onrender.com,localhost,127.0.0.1
       - key: CORS_ALLOWED_ORIGINS
         value: https://sms-frontend.onrender.com
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://sms-frontend.onrender.com
+        value: https://sms-frontend.onrender.com,https://sms-backend.onrender.com
 
   - type: web
     name: sms-frontend
     env: static
-    rootDir: frontend
+    rootDir: SMS/frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     envVars:
